@@ -3,143 +3,229 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlet;
+package proje3;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  *
  * @author Buğra
  */
-public class Liste extends HttpServlet {
+public class Main {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
      *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @param args
+     * @throws java.sql.SQLException
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, ClassNotFoundException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = "jdbc:mysql://localhost:3306/proje2";
-        String user = "root";
-        String password = "12011991";
+    public static void main(String[] args) throws SQLException {
+        int a = 0, b;
+        try {
+
+            Scanner reader = new Scanner(System.in);
+            while (a != 4) {
+                System.out.println("----------------------------------\nMENU:");
+                System.out.println("1. Kullanıcı Ekle\n2. Kullanıcı Çıkar\n3. Kullanıcıları Listele\n4. Çıkış");
+                try {
+                    a = reader.nextInt();
+                    switch (a) {
+                        case 1:
+                            try {
+                                System.out.println("----------------------------------\nKullanıcı ekle:");
+                                System.out.println("1. Öğrenci\n2. Stajyer\n3. Geliştirici");
+                                b = reader.nextInt();
+
+                                switch (b) {
+                                    case 1:
+                                        Ekle("Öğrenci");
+                                        break;
+                                    case 2:
+                                        Ekle("Stajyer");
+                                        break;
+                                    case 3:
+                                        Ekle("Geliştirici");
+                                        break;
+                                    default:
+                                        System.out.println("----------------------------------\nHatalı Giriş.");
+                                        break;
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("----------------------------------\nHatalı Giriş.");
+                                reader.nextLine();
+                            }
+                            break;
+                        case 2:
+                            cikar();
+                            break;
+                        case 3:
+                            liste();
+                            break;
+                        case 4:
+                            break;
+                        default:
+                            System.out.println("----------------------------------\nHatalı Giriş.");
+                            break;
+                    }
+                } catch (InputMismatchException e) {
+
+                    System.out.println("----------------------------------\nHatalı Giriş.");
+                    reader.nextLine();
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    static void Ekle(String meslek) throws SQLException {
+        Scanner reader = new Scanner(System.in);
+        String isim, soyisim, email, okuladi, birim, kurum;
+        int no, yas;
+        try {
+            System.out.println("İsim:");
+            isim = reader.nextLine();
+            while (!isim.matches("[a-zA-Z]+")) {
+                System.out.println("Lütfen geçerli bir isim girin.");
+                isim = reader.nextLine();
+            }
+            System.out.println("Soyisim:");
+            soyisim = reader.nextLine();
+            while (!soyisim.matches("[a-zA-Z]+")) {
+                System.out.println("Lütfen geçerli bir soyisim girin.");
+                soyisim = reader.nextLine();
+            }
+            System.out.println("e-mail:");
+            email = reader.nextLine();
+
+            if (meslek != "Geliştirici") {
+                System.out.println("Öğrenci no:");
+                do {
+                    try {
+
+                        no = reader.nextInt();
+                        reader.nextLine();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Lütfen geçerli bir sayı girin.");
+                        reader.nextLine();
+                    }
+                } while (true);
+                System.out.println("Okul adı:");
+                okuladi = reader.nextLine();
+                while (!okuladi.matches("[a-zA-Z]+")) {
+                    System.out.println("Lütfen geçerli bir okul adı girin.");
+                    okuladi = reader.nextLine();
+                }
+
+                if (meslek == "Stajyer") {
+                    System.out.println("Çalıştığı birim:");
+                    birim = reader.nextLine();
+                    while (!birim.matches("[a-zA-Z]+")) {
+                        System.out.println("Lütfen geçerli bir birim adı girin.");
+                        birim = reader.nextLine();
+                    }
+                    URL surl = new URL("http://localhost:8080/WebApplication1/StajyerEkle?isim=" + isim + "&soyisim=" + soyisim + "&email=" + email + "&numara=" + no + "&okuladi=" + okuladi + "&birim=" + birim);
+                    BufferedReader in = new BufferedReader(new InputStreamReader(surl.openStream()));
+                    while (in.ready()) {
+                        String line = in.readLine();
+                        System.out.println(line);
+                    }
+                    in.close();
+                } else {
+                    URL surl = new URL("http://localhost:8080/WebApplication1/OgrenciEkle?isim=" + isim + "&soyisim=" + soyisim + "&email=" + email + "&numara=" + no + "&okuladi=" + okuladi);
+                    BufferedReader in = new BufferedReader(new InputStreamReader(surl.openStream()));
+                    while (in.ready()) {
+                        String line = in.readLine();
+                        System.out.println(line);
+                    }
+                    in.close();
+
+                }
+            } else {
+                System.out.println("Yaş:");
+                do {
+                    try {
+
+                        yas = reader.nextInt();
+                        reader.nextLine();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Lütfen geçerli bir sayı girin.");
+                        reader.nextLine();
+                    }
+                } while (true);
+                System.out.println("Çalıştığı kurum:");
+                kurum = reader.nextLine();
+                while (!kurum.matches("[a-zA-Z]+")) {
+                    System.out.println("Lütfen geçerli bir kurum adı girin.");
+                    kurum = reader.nextLine();
+                }
+                URL surl = new URL("http://localhost:8080/WebApplication1/GelistiriciEkle?isim=" + isim + "&soyisim=" + soyisim + "&email=" + email + "&yas=" + yas + "&kurum=" + kurum);
+                BufferedReader in = new BufferedReader(new InputStreamReader(surl.openStream()));
+                while (in.ready()) {
+                    String line = in.readLine();
+                    System.out.println(line);
+                }
+                in.close();
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void liste() throws SQLException {
         Statement stmt = null, stmto = null, stmts = null, stmtg = null;
         ResultSet rs = null, rso = null, rss = null, rsc = null, rsg = null;
         PreparedStatement pstmtc = null;
-        try (PrintWriter out = response.getWriter()) {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(url, user, password);
-            stmt = conn.createStatement();
-            stmto = conn.createStatement();
-            stmts = conn.createStatement();
-            stmtg = conn.createStatement();
 
-            rs = stmt.executeQuery("select * from kullanicilar");
-            if (!rs.next()) {
-                out.println("----------------------------------\nListe boş.");
-            } else {
-                out.println("----------------------------------\nKullanıcı bilgileri:");
-                rs = stmt.executeQuery("select * from kullanicilar");
-                rso = stmto.executeQuery("select * from ogrenci");
-                rss = stmts.executeQuery("select * from stajyer");
-                rsg = stmtg.executeQuery("select * from gelistirici");
-                while (rs.next()) {
-                    out.print(rs.getString("id") + ", İsim:" + rs.getString("isim") + ", Soyisim:" + rs.getString("soyisim") + ", Meslek:" + rs.getString("meslek") + ", e-mail:" + rs.getString("email"));
-                    pstmtc = conn.prepareStatement("select * from ogrenci where p_id=?");
-                    pstmtc.setInt(1, rs.getInt("id"));
-                    rsc = pstmtc.executeQuery();
-                    if (rsc.next()) {
-                        rso.next();
-                        out.print(", Öğrenci no:" + rso.getString("numara") + ", Okul adı:" + rso.getString("okuladi"));
-                    }
-                    pstmtc = conn.prepareStatement("select * from stajyer where p_id=?");
-                    pstmtc.setInt(1, rs.getInt("id"));
-                    rsc = pstmtc.executeQuery();
-                    if (rsc.next()) {
-                        rss.next();
-                        out.print(", Çalıştığı birim:" + rss.getString("birim"));
-                    }
-                    pstmtc = conn.prepareStatement("select * from gelistirici where p_id=?");
-                    pstmtc.setInt(1, rs.getInt("id"));
-                    rsc = pstmtc.executeQuery();
-                    if (rsc.next()) {
-                        rsg.next();
-                        out.print(", Yaş:" + rsg.getString("yas") + ", Çalıştığı kurum:" + rsg.getString("kurum"));
-                    }
-                    out.println(", Eklenme tarihi:" + rs.getString("tarih"));
-                }
+        try {
+            URL surl = new URL("http://localhost:8080/WebApplication1/Liste");
+            BufferedReader in = new BufferedReader(new InputStreamReader(surl.openStream()));
+            while (in.ready()) {
+                String line = in.readLine();
+                System.out.println(line);
             }
+            in.close();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    static void cikar() throws SQLException {
+        int i;
         try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Liste.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Liste.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Silinecek kayıt:");
+            Scanner reader = new Scanner(System.in);
+            i = reader.nextInt();
+            URL surl = new URL("http://localhost:8080/WebApplication1/Cikar?i=" + i);
+            BufferedReader in = new BufferedReader(new InputStreamReader(surl.openStream()));
+            while (in.ready()) {
+                String line = in.readLine();
+                System.out.println(line);
+            }
+            in.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Liste.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Liste.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
