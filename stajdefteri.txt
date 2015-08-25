@@ -1,0 +1,66 @@
+03/08/2015
+Staj için gerekli kayıt işlemleri yapıldı, evraklar teslim edildi, stajyer kimlik kartı çıkarıldı. Daha sonra, çalışacağım birime geçerek yetkili mühendisle tanıştım ve staj süresince yapılacaklarla ilgili bilgiler aldım.
+
+04/08/2015
+Staj süresince kullanacağım programlar ve bu programların ihtiyaç duyduğu yazılımları bilgisayarıma yükledim.Bu programların ne işe yaradıkları hakkında araştırmalar yaptım.
+
+05/08/2015
+Java'da yapacağım ilk çalışmayla ilgili yetkili mühendisten gerekli bilgileri aldım ve Java programlama hakkında internetten ders videoları izledim(udemy.com). Çalışma: inheritance ve polymorphism ile oluşturulan sınıf ve mototlarla farklı kullanıcı bilgileri alınacak, hafızada tutulacak, silinecek ve listelenecek.
+
+06/08/2015
+İlk çalışmamın kodlarını yazmaya başladım. Bu sırada Java dilinin C++ ile ne gibi farklılıklar taşıdığını karşılaştığım sorunlarla görmüş oldum. Sınıf kalıtımları konusunda yaşadığım sorunları görevli mühendisime danışarak giderdim.
+
+07/08/2015
+Yaptığım çalışmada parametre kontrollerini detaylandırdım. Try-catch-finally ve matches metotlarının kullanımını öğrendim ve çalışmamda uyguladım.
+Regular expression yardımıyla string kontrolünü istediğim şekilde yaptım.
+
+----------
+
+10/08/2015
+Javadoc'un ne olduğunu, nasıl oluşturulduğunu ve javadoc kullanmanın faydaları konusunda araştırmalar yaptım ve çalışmamda uyguladım. Çalışmamın son haliyle ilgili notlar aldım, görevli mühendisimle görüştüm ve ilk çalışmamı böylece bitirdim.
+
+11/08/2015
+İkinci çalışmamla ilgili görevli mühendis ile görüştüm ve çalışmalara başladım. 2.çalışma: MySQL kullanarak veri tabanı oluşturma ve ilk çalışmada yazılan java programıyla bu veritabanına kullanıcı ekleme, çıkarma ve listeleme işlemleri.
+
+12/08/2015
+Çalışmada kullanacağım MySQL programının derslerini yine udemy.com dan izleyerek hem program kullanımı hem de sql dili ile ilgili çalışmalara yaptım.
+
+13/08/2015
+Netbeans ile jdbc sürücüsünü ekledim ve MySQL veritabanı bağlantısını oluşturdum. MySQL ile tablo oluşturmaya başladım.
+
+14/08/2015
+İlk çalışmamdaki kalıtım sınıflarının benzerini referans ID'leri kullanarak bağlantılı tablolarla oluşturdum. Java'da bu tablolardaki verileri işleyen metotlar yazdım.
+
+----------
+
+17/08/2015
+Çalışmama devam ettim ve önceden ortaya çıkan bazı sorunları çözerek çalışmamı bitirdim. Görevli mühendisimle görüştüm ve servlet'ler ile ilgili yeni çalışma konuları edindim.
+
+18/08/2015
+Servletler hakkında internetten araştırmalar yaptım ve örnek kodlar inceledim. Genel olarak hangi amaçla kullanıldıkları ve faydaları hakkında çalışmalar yaptım.
+
+19/08/2015
+Yaptığım çalışmalar üzerine gerekli servletleri yazmaya başladım. Tomcat sunucusunu kurdum ve daha önceki çalışmalarımda yazdığım kodları da kullanarak, projeme yazdığım servletleri ekledim.
+
+20/08/2015
+Projemin son halini tekrar görevli mühendisimle görüştüm. Cache oluşturma ve kullanma hakkında yeni bir çalışma konusuna başladım.
+
+21/08/2015
+Cache hakkında çalışmalarıma devam ettim. Ehcache ile ilgili dökümanlar okudum ve örnek kodlar inceledim.
+
+----------
+
+24/08/2015
+Ehcache'in projeye eklenmesi konusunda araştırmalar yaptım. Kendi projeme nasıl ekleyebileceğim üzerinde çalıştım.
+
+25/08/2015
+Java design pattern'lerinin neler olduklarını ve ne işe yaradıklarını öğrendim. Projemde oluşturduğum classlar ve metotolarla bu pattern'leri karşılaştırdım.
+
+26/08/2015
+Projemin son halini github'a yükleyerek görevli mühendisimle paylaştım. Java web service ile ilgili araştırmalar yapmaya başladım.
+
+27/08/2015
+Java web service ile yazdığım servletler arasındaki farkları öğrendim. Web service kullanmanın avantajları hakkında çalışmalar yaptım.
+
+28/08/2015
+Son çalışmalarımı bitirdim ve görevli mühendisimle görüştüm. Gerekli evraklarımı imzalatmak için Türksat'ın ana kampüsüne gittim ve çıkış işlemlerimi yaptım.
